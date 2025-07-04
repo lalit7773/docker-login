@@ -1,13 +1,16 @@
 pipeline {
     agent any
+    tools {
+        maven 'Maven 3.8.8' // replace with your Jenkins Maven name
+    }
     stages {
-        stage("pull-scm") {
+        stage("Clone Repository") {
             steps {
                 git branch: 'main', url: 'https://github.com/lalit7773/docker-login.git'
             }
         }
-        stage("build"){
-            steps{
+        stage("Build with Maven") {
+            steps {
                 sh 'mvn clean package'
             }
         }
